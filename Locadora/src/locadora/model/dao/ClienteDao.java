@@ -1,4 +1,4 @@
-package com.dao;
+package locadora.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.conexao.ConexaoException;
-import com.conexao.FabricaConexao;
-import com.pojo.Cliente;
+import locadora.conexao.factory.jdbc.ConexaoException;
+import locadora.conexao.factory.jdbc.FabricaConexao;
+import locadora.model.entity.Cliente;
 
 
 public class ClienteDao {
@@ -47,12 +47,9 @@ public class ClienteDao {
 			FabricaConexao.fecharPreparedStatement(ps);
 		}
 
-	}/* fim addCliente */
+	}/* end addCliente */
 
-	public void fecharConexao() throws ConexaoException {
-		FabricaConexao.fecharConexao(conexao);
-
-	}// fim fecharConexao
+	
 	
 	
 	public void delCliente(int ID) throws ConexaoException {
@@ -76,7 +73,7 @@ public class ClienteDao {
 			;
 		}
 
-	}// fim deletaUsuario
+	}// end deletaUsuario
 	
 	public List<Cliente> getAllClienteBD() throws ConexaoException {
 
@@ -94,7 +91,7 @@ public class ClienteDao {
 
 			while (rs.next()) {
 
-				p = new Cliente(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+				p = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 
 				pessoas.add(p);
 			}
@@ -112,7 +109,7 @@ public class ClienteDao {
 			FabricaConexao.fecharStmtRs(st, rs);
 		}
 		
-	}/* fim getClienteFromBD*/
+	}/* end getClienteFromBD*/
 	
 	/*listaTodoCliente: chama o metodo "getClienteFromBD" portanto já add os clientes obtidos do Banco de Dados */
 public void listaAllCliente()throws ConexaoException{
@@ -126,10 +123,13 @@ public void listaAllCliente()throws ConexaoException{
 				System.out.printf("ID: %d\t|Nome: %s %s\t CPF: %s Data de nascimento: %s%n", clien.getIdCliente(), clien.getFirstName(), clien.getLastName(), clien.getCpf(), clien.getBirthDay());
 			} 
 
-	}// fim listaTodoCliente
+	}// end listaTodoCliente
 	
 
-	
+public void fecharConexao() throws ConexaoException {
+	FabricaConexao.fecharConexao(conexao);
+
+}// end fecharConexao
 	
 	
 	

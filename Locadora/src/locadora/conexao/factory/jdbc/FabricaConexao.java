@@ -1,4 +1,4 @@
-package com.conexao;
+package locadora.conexao.factory.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

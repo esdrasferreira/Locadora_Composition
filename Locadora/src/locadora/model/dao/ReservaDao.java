@@ -1,4 +1,4 @@
-package com.dao;
+package locadora.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.conexao.ConexaoException;
-import com.conexao.FabricaConexao;
-import com.pojo.Reserva;
+import loadora.model.service.ReservaValidacao;
+import locadora.conexao.factory.jdbc.ConexaoException;
+import locadora.conexao.factory.jdbc.FabricaConexao;
+import locadora.model.entity.Reserva;
 
 public class ReservaDao {
 	
@@ -26,20 +27,30 @@ public class ReservaDao {
 		PreparedStatement ps = null;
 		Connection conexao = null;
 
+		ReservaValidacao rv = new ReservaValidacao();
+		
+				
+	    String retirada = rv.dateToMySql(r.getDataRetirada()); //change from DATE to String before send to Mysql
+	    String entrega = rv.dateToMySql(r.getDataEntrega());//change from DATE to String before send to Mysql
+		
+	    
+		
 		try {
 			conexao = this.conexao;
 			ps = conexao.prepareStatement(
 					"INSERT INTO `locadora`.`reserva` (`idreserva`, `dataRetirada`, `dataEntregua`, `diasLocado`, `valorPago`, `cliente_idcliente`, `veiculo_idveiculo`) VALUES (?,?,?,?,?,?,?)");
 			
-
+			
 			ps.setInt(1, r.getIdReserva());
-			ps.setString(2, r.getDataRetirada());
-			ps.setString(3, r.getDataEntrega());
+			ps.setString(2, retirada);
+			ps.setString(3, entrega);
 			ps.setLong(4, r.getDiasLocado());
 			ps.setDouble(5, r.getValorPago());
 			ps.setInt(6, r.getIdCliente());
 			ps.setInt(7, r.getIdVeiculo());
 			ps.executeUpdate();
+			
+			System.out.println("Reserva adicionada com sucesso");
 
 		} catch (SQLException sqle) {
 			throw new ConexaoException();
@@ -51,7 +62,7 @@ public class ReservaDao {
 	}// end insertReserva
 	
 	
-	public void getAllReservaBD() throws ConexaoException {
+	public List<Reserva> getAllReservaBD() throws ConexaoException {
 
 		Connection conexao = null;
 		ResultSet rs = null;
@@ -73,10 +84,12 @@ public class ReservaDao {
 
 			while (rs.next()) {
 
-				reserva = new Reserva(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getDouble(6),rs.getInt(7),rs.getString(8),rs.getString(9), rs.getLong(10),rs.getDouble(11));
+				reserva = new Reserva(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getDouble(6),rs.getInt(7),rs.getDate(8),rs.getDate(9), rs.getLong(10),rs.getDouble(11));
 
 				re.add(reserva);
+				
 			}
+			
 			System.out.println("Lista de todas as reservas:");
 			for (Reserva res : re) {
 				System.out.printf(
@@ -84,7 +97,7 @@ public class ReservaDao {
 						res.getIdCliente(), res.getFirstName(), res.getLastName(), res.getIdVeiculo(),
 						res.getModelo(), res.getDiaria(),res.getIdReserva() , res.getDataRetirada(), res.getDataEntrega(),res.getDiasLocado(),res.getValorPago());
 			}
-			
+			return re;
 
 		} catch (SQLException sqle) {
 			throw new ConexaoException("Erro ao visualizar os dados" + sqle);
@@ -92,10 +105,11 @@ public class ReservaDao {
 			System.out.println();
 			FabricaConexao.fecharStmtRs(st, rs);
 		}
+		
 
 	}// End getAllReservas
 
-	public void getReserva(int ID) throws ConexaoException {
+	public List<Reserva> getReserva(int ID) throws ConexaoException {
 
 		Connection conexao = null;
 		ResultSet rs = null;
@@ -117,18 +131,11 @@ public class ReservaDao {
 
 			while (rs.next()) {
 
-				reserva = new Reserva(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getDouble(6),rs.getInt(7),rs.getString(8),rs.getString(9), rs.getLong(10),rs.getDouble(11));
+				reserva = new Reserva(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getDouble(6),rs.getInt(7),rs.getDate(8),rs.getDate(9), rs.getLong(10),rs.getDouble(11));
 
 				re.add(reserva);
 			}
-			System.out.println("Reservas da ID:" +ID+"");
-			for (Reserva res : re) {
-				System.out.printf(
-						"ID user: %d\t|Nome: %s %s\t | ID do veiculo: %02d\t| Modelo: %-20s\t| Diaria:R$ %-15.2f\t| ID reserva:  %02d| Alugado de %s  a %s | Total de dias: %d | Valor pago: R$ %.2f%n",
-						res.getIdCliente(), res.getFirstName(), res.getLastName(), res.getIdVeiculo(),
-						res.getModelo(), res.getDiaria(),res.getIdReserva() , res.getDataRetirada(), res.getDataEntrega(),res.getDiasLocado(),res.getValorPago());
-			}
-			System.out.println();
+			return re;
 
 		} catch (SQLException sqle) {
 			throw new ConexaoException("Erro ao visualizar os dados" + sqle);
@@ -139,37 +146,50 @@ public class ReservaDao {
 
 	}// End getAllReservas
 
-	public void UpdateReserva(Reserva r) throws ConexaoException {
-
-		PreparedStatement ps = null;
-		Connection conexao = null;
-//UPDATE `locadora`.`reserva` SET `dataEntregua` = '05/13/2018' WHERE (`idreserva` = '1') and (`cliente_idcliente` = '2') and (`veiculo_idveiculo` = '1');
-		try {
-			conexao = this.conexao;
-			ps = conexao.prepareStatement(
-					"UPDATE `locadora`.`reserva` SET `dataRetirada` = ?, `dataEntregua` = ?, `diasLocado` = ?, `valorPago` = ? WHERE (`idreserva` = ?) and (`cliente_idcliente` = ?) and (`veiculo_idveiculo` = ?);");
-			
-
-			ps.setString(1, r.getDataRetirada());
-			ps.setString(2, r.getDataEntrega());
-			ps.setLong(3, r.getDiasLocado());
-			ps.setDouble(4, r.getValorPago());
-			ps.setInt(5, r.getIdReserva());
-			ps.setInt(6, r.getIdCliente());
-			ps.setInt(7, r.getIdVeiculo());
-			ps.executeUpdate();
-
-		} catch (SQLException sqle) {
-			throw new ConexaoException();
-		} finally {
-			FabricaConexao.fecharPreparedStatement(ps);
-
-		}
-
-	}// end insertReserva
+//	public void UpdateReserva(Reserva r) throws ConexaoException {
+//
+//		PreparedStatement ps = null;
+//		Connection conexao = null;
+////UPDATE `locadora`.`reserva` SET `dataEntregua` = '05/13/2018' WHERE (`idreserva` = '1') and (`cliente_idcliente` = '2') and (`veiculo_idveiculo` = '1');
+//		
+//		Date data1 = r.getDataRetirada();
+//		Date data2 = r.getDataEntrega();
+//		long dias = r.getDiasLocado();
+//		Double pgto = r.getValorPago();
+//		int idres = r.getIdReserva();
+//		int idcliente = r.getIdCliente();
+//		int idveiculo = r.getIdVeiculo();
+//		
+//		
+//		
+//		try {
+//			conexao = this.conexao;
+//			ps = conexao.prepareStatement(
+//					"UPDATE `locadora`.`reserva` SET `dataRetirada` = '"+data1+"', `dataEntregua` = '"+data2+"', `diasLocado` = '"+dias+"', `valorPago` = '"+pgto+"' WHERE (`idreserva` = '"+idres+"') and (`cliente_idcliente` = '"+idcliente+"') and (`veiculo_idveiculo` = '"+idveiculo+"');");
+//			
+//
+////			ps.setString(1, r.getDataRetirada());
+////			ps.setString(2, r.getDataEntrega());
+////			ps.setLong(3, r.getDiasLocado());
+////			ps.setDouble(4, r.getValorPago());
+////			ps.setInt(5, r.getIdReserva());
+////			ps.setInt(6, r.getIdCliente());
+////			ps.setInt(7, r.getIdVeiculo());
+//			ps.executeUpdate();
+//
+//		} catch (SQLException sqle) {
+//			throw new ConexaoException();
+//		} finally {
+//			FabricaConexao.fecharPreparedStatement(ps);
+//
+//		}
+//
+//	}// end UpdateReserva
 	
 	
-	
+//	public void imprimeReservas() {
+//		
+//	}
 	
 	
 	

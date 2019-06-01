@@ -1,4 +1,4 @@
-package com.dao;
+package locadora.model.dao;
 
 public class FuncionarioDao {
 

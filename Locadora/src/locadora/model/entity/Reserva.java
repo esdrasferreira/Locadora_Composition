@@ -1,10 +1,14 @@
-package com.pojo;
+package locadora.model.entity;
+
+import java.util.Date;
+
+import loadora.model.service.CalculosReserva;
 
 public class Reserva {
 
 	int idReserva;
-	String dataRetirada;
-	String dataEntrega;
+	Date dataRetirada;
+	Date dataEntrega;
 	Double ValorPago;
 	long diasLocado;
 
@@ -17,8 +21,10 @@ public class Reserva {
 	int idVeiculo;
 	String modelo;
 	Double diaria;
+	
+	CalculosReserva cr = new CalculosReserva();
 
-	public Reserva(int idReserva, String dataRetirada, String dataEntrega, long diasLocado, Double valorPago) {
+	public Reserva(int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago) {
 		this.idReserva = idReserva;
 		this.dataRetirada = dataRetirada;
 		this.dataEntrega = dataEntrega;
@@ -26,7 +32,7 @@ public class Reserva {
 		this.diasLocado = diasLocado;
 	}
 
-	public Reserva(int idReserva, String dataRetirada, String dataEntrega, long diasLocado, Double valorPago,
+	public Reserva(int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago,
 			int idCliente, int idVeiculo) {
 		this.idReserva = idReserva;
 		this.dataRetirada = dataRetirada;
@@ -40,7 +46,7 @@ public class Reserva {
 	}
 
 	public Reserva(int idCliente, String firstName, String lastName, int idVeiculo, String modelo, Double diaria,
-			int idReserva, String dataRetirada, String dataEntrega, long diasLocado, Double valorPago) {
+			int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago) {
 
 		this.idCliente = idCliente;
 		this.firstName = firstName;
@@ -68,19 +74,19 @@ public class Reserva {
 		this.idReserva = idReserva;
 	}
 
-	public String getDataRetirada() {
+	public Date getDataRetirada() {
 		return dataRetirada;
 	}
 
-	public void setDataRetirada(String dataRetirada) {
+	public void setDataRetirada(Date dataRetirada) {
 		this.dataRetirada = dataRetirada;
 	}
 
-	public String getDataEntrega() {
+	public Date getDataEntrega() {
 		return dataEntrega;
 	}
 
-	public void setDataEntrega(String dataEntrega) {
+	public void setDataEntrega(Date dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
 

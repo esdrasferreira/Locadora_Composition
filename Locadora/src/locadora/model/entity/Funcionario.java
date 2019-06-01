@@ -1,4 +1,4 @@
-package com.pojo;
+package locadora.model.entity;
 
 public class Funcionario {
 	

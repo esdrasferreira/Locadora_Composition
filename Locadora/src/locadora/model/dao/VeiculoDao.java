@@ -1,4 +1,4 @@
-package com.dao;
+package locadora.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.conexao.ConexaoException;
-import com.conexao.FabricaConexao;
-import com.pojo.Veiculo;
+
+import locadora.conexao.factory.jdbc.ConexaoException;
+import locadora.conexao.factory.jdbc.FabricaConexao;
+import locadora.model.entity.Veiculo;
 
 public class VeiculoDao {
 

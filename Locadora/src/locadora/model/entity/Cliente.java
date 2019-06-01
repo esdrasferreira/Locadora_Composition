@@ -1,11 +1,12 @@
-package com.pojo;
+package locadora.model.entity;
 
 public class Cliente {
 	
 	int idCliente;
 	String firstName;
 	String lastName;
-	
+	String cpf;
+	String birthDay;
 	
 	
 	public Cliente(int idCliente, String firstName, String lastName, String cpf, String birthDay) {
@@ -45,8 +46,7 @@ public class Cliente {
 	public void setBirthDay(String birthDay) {
 		this.birthDay = birthDay;
 	}
-	String cpf;
-	String birthDay;
+	
 
 	
 }

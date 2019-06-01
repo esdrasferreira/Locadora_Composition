@@ -1,4 +1,4 @@
-package com.conexao;
+package locadora.conexao.factory.jdbc;
 
 public class ConexaoException extends Exception{
 	
