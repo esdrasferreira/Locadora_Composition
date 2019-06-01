@@ -24,7 +24,7 @@ public class ReservaValidacao {
 		
 		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String dataString = sdf2.format(data);  //converte de DATE para String e o formato de dd/MM/yyyy para yyyy/MM/dd para o Mysql
+		String dataString = sdf2.format(data);  
 		
 		System.out.println("date to string changed sucessfully"+ dataString);
 		
