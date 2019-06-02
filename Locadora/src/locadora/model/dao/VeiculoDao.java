@@ -43,6 +43,8 @@ public class VeiculoDao {
 			throw new ConexaoException();
 		} finally {
 			FabricaConexao.fecharPreparedStatement(ps);
+			this.fecharConexao();
+			
 		}
 
 	}/* fim addCliente */
@@ -79,6 +81,7 @@ public class VeiculoDao {
 		} finally {
 			
 			FabricaConexao.fecharStmtRs(st, rs);
+			this.fecharConexao();
 		}
 		
 	}/* fim getVeiculoFromBD*/
@@ -101,7 +104,7 @@ public class VeiculoDao {
 			throw new ConexaoException();
 		} finally {
 			FabricaConexao.fecharStatement(st);
-			;
+			this.fecharConexao();
 		}
 		
 	}// fim delVeiculo
@@ -109,7 +112,9 @@ public class VeiculoDao {
 	
 	
 	
-	
+	public void fecharConexao() throws ConexaoException {
+		FabricaConexao.fecharConexao(conexao);
+	}/*fecharConexao*/
 	
 	
 	

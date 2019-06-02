@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import loadora.model.service.CalculosReserva;
 import loadora.model.service.ReservaValidacao;
 import locadora.conexao.factory.jdbc.ConexaoException;
 import locadora.controller.ReservaController;
@@ -39,13 +40,13 @@ public class TestaMVCDAO {
 		
 		ReservaController rsc = new ReservaController();
 		
-		rsc.createReserva("12/12/2018", "17/12/218", 150, 2, 1);
-		
+//		rsc.createReserva("12/12/2018", "17/12/2018", 150, 2, 1);
+		rsc.listaReservas();
 	
-//		ReservaValidacao rv = new ReservaValidacao();
+
 		
 		
-		
+		CalculosReserva cv = new CalculosReserva();
 		
 		
 		

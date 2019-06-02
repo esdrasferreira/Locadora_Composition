@@ -45,6 +45,7 @@ public class ClienteDao {
 			throw new ConexaoException();
 		} finally {
 			FabricaConexao.fecharPreparedStatement(ps);
+			this.fecharConexao();
 		}
 
 	}/* end addCliente */
@@ -70,7 +71,7 @@ public class ClienteDao {
 			throw new ConexaoException();
 		} finally {
 			FabricaConexao.fecharStatement(st);
-			;
+			this.fecharConexao();
 		}
 
 	}// end deletaUsuario
@@ -107,6 +108,7 @@ public class ClienteDao {
 		} finally {
 			
 			FabricaConexao.fecharStmtRs(st, rs);
+			this.fecharConexao();
 		}
 		
 	}/* end getClienteFromBD*/
