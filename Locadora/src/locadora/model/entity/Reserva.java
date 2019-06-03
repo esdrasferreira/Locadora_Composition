@@ -2,7 +2,7 @@ package locadora.model.entity;
 
 import java.util.Date;
 
-import loadora.model.service.CalculosReserva;
+import locadora.model.service.calculos.CalculosReserva;
 
 public class Reserva {
 

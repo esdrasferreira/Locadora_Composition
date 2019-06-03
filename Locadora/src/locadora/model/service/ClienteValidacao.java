@@ -1,4 +1,4 @@
-package loadora.model.service;
+package locadora.model.service;
 
 public class ClienteValidacao {
 

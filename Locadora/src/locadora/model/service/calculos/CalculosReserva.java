@@ -1,4 +1,4 @@
-package loadora.model.service;
+package locadora.model.service.calculos;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import locadora.model.entity.Reserva;
+import locadora.model.service.ReservaValidacao;
 
 public class CalculosReserva {
 	

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import loadora.model.service.ReservaValidacao;
 import locadora.conexao.factory.jdbc.ConexaoException;
 import locadora.conexao.factory.jdbc.FabricaConexao;
 import locadora.model.entity.Reserva;
+import locadora.model.service.ReservaValidacao;
 
 public class ReservaDao {
 

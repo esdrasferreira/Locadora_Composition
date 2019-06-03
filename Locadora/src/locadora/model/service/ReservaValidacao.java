@@ -1,4 +1,4 @@
-package loadora.model.service;
+package locadora.model.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +10,7 @@ import java.util.List;
 import locadora.conexao.factory.jdbc.ConexaoException;
 import locadora.model.dao.ReservaDao;
 import locadora.model.entity.Reserva;
+import locadora.model.service.calculos.CalculosReserva;
 
 public class ReservaValidacao {
 

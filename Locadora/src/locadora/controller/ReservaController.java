@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import loadora.model.service.CalculosReserva;
-import loadora.model.service.ReservaValidacao;
 import locadora.conexao.factory.jdbc.ConexaoException;
 import locadora.model.dao.ReservaDao;
 import locadora.model.entity.Reserva;
+import locadora.model.service.ReservaValidacao;
+import locadora.model.service.calculos.CalculosReserva;
 
 public class ReservaController {
 

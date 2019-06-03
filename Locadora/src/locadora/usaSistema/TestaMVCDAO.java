@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import loadora.model.service.CalculosReserva;
-import loadora.model.service.ReservaValidacao;
 import locadora.conexao.factory.jdbc.ConexaoException;
 import locadora.controller.ReservaController;
 import locadora.model.dao.ClienteDao;
@@ -15,6 +13,8 @@ import locadora.model.dao.VeiculoDao;
 import locadora.model.entity.Cliente;
 import locadora.model.entity.Reserva;
 import locadora.model.entity.Veiculo;
+import locadora.model.service.ReservaValidacao;
+import locadora.model.service.calculos.CalculosReserva;
 
 public class TestaMVCDAO {
 
