@@ -44,8 +44,8 @@ public class ReservaDao {
 			ps.setString(3, entrega);
 			ps.setLong(4, r.getDiasLocado());
 			ps.setDouble(5, r.getValorPago());
-			ps.setInt(6, r.getIdCliente());
-			ps.setInt(7, r.getIdVeiculo());
+			ps.setInt(6, r.getCliente().getIdCliente());
+			ps.setInt(7, r.getVeiculo().getIdVeiculo());
 			ps.executeUpdate();
 
 			System.out.println("Reserva adicionada com sucesso");

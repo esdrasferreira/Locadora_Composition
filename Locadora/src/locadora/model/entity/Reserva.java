@@ -104,5 +104,13 @@ public class Reserva {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+	
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
 
 }
