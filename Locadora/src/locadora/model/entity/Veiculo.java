@@ -16,6 +16,9 @@ public class Veiculo {
 		this.ano = ano;
 		this.diaria = diaria;
 	}
+	
+	Veiculo (){}
+	
 	public int getIdVeiculo() {
 		return idVeiculo;
 	}

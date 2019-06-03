@@ -16,6 +16,10 @@ public class Cliente {
 		this.cpf = cpf;
 		this.birthDay = birthDay;
 	}
+	
+	Cliente (){}
+	
+	
 	public int getIdCliente() {
 		return idCliente;
 	}

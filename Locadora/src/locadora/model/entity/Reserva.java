@@ -2,8 +2,6 @@ package locadora.model.entity;
 
 import java.util.Date;
 
-import locadora.model.service.calculos.CalculosReserva;
-
 public class Reserva {
 
 	int idReserva;
@@ -12,17 +10,10 @@ public class Reserva {
 	Double ValorPago;
 	long diasLocado;
 
-	private Cliente cliente;
-	int idCliente;
-	String firstName;
-	String lastName;
+	private Cliente cliente = new Cliente();
 
-	private Veiculo auto;
-	int idVeiculo;
-	String modelo;
-	Double diaria;
-	
-	CalculosReserva cr = new CalculosReserva();
+	private Veiculo veiculo = new Veiculo();
+
 
 	public Reserva(int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago) {
 		this.idReserva = idReserva;
@@ -32,28 +23,28 @@ public class Reserva {
 		this.diasLocado = diasLocado;
 	}
 
-	public Reserva(int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago,
-			int idCliente, int idVeiculo) {
+	public Reserva(int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago, int idCliente,
+			int idVeiculo) {
 		this.idReserva = idReserva;
 		this.dataRetirada = dataRetirada;
 		this.dataEntrega = dataEntrega;
 		ValorPago = valorPago;
 		this.diasLocado = diasLocado;
 		this.ValorPago = valorPago;
-		this.idCliente = idCliente;
-		this.idVeiculo = idVeiculo;
+		cliente.setIdCliente(idCliente);
+		veiculo.setIdVeiculo(idVeiculo);
 
 	}
 
 	public Reserva(int idCliente, String firstName, String lastName, int idVeiculo, String modelo, Double diaria,
 			int idReserva, Date dataRetirada, Date dataEntrega, long diasLocado, Double valorPago) {
 
-		this.idCliente = idCliente;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.idVeiculo = idVeiculo;
-		this.modelo = modelo;
-		this.diaria = diaria;
+		cliente.setIdCliente(idCliente);
+		cliente.setFirstName(firstName);
+		cliente.setLastName(lastName);
+		veiculo.setIdVeiculo(idVeiculo);
+		veiculo.setModelo(modelo);
+		veiculo.setDiaria(diaria);
 		this.idReserva = idReserva;
 		this.dataRetirada = dataRetirada;
 		this.dataEntrega = dataEntrega;
@@ -112,62 +103,6 @@ public class Reserva {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public int getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
-	}
-
-	public Veiculo getAuto() {
-		return auto;
-	}
-
-	public void setAuto(Veiculo auto) {
-		this.auto = auto;
-	}
-
-	public int getIdVeiculo() {
-		return idVeiculo;
-	}
-
-	public void setIdVeiculo(int idVeiculo) {
-		this.idVeiculo = idVeiculo;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public Double getDiaria() {
-		return diaria;
-	}
-
-	public void setDiaria(Double diaria) {
-		this.diaria = diaria;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 }
